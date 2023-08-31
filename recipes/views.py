@@ -12,7 +12,7 @@ def recipes(request):
       elif request.method == 'POST':
           try:  
             table.put_item(Item=request.data)
-            return Response(status=status.HTTP_201_CREATED)
+            return Response({"recipe": request.data},status=status.HTTP_201_CREATED)
           except:
               return Response({'error': 'Failed to insert'},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -31,7 +31,7 @@ def recipe(request,id):
     if request.method == 'PUT':
         try:  
             table.put_item(Item=request.data)
-            return Response(status=status.HTTP_201_CREATED)
+            return Response({"recipe": request.data}, status=status.HTTP_201_CREATED)
         except:
             return Response({'error': 'Failed to update'},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     if request.method == 'DELETE':
